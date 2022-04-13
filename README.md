@@ -14,7 +14,7 @@ gui:    class to chage parameters for processing with gui and mouce controler
 
 labview_interface:    communicate with labview in TCP protocol
 
-
+tdmaker: class to create artificial time delay
 
 
 ****** this program requires some independencies below *******

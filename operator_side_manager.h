@@ -24,8 +24,6 @@ private:
 	std::vector<float> points_;
 	std::vector<int> color_;
 
-	//float* points_;
-	//int* color_;
 	int points_size_;
 
 	//int receiver_color_option_ = POINTS_COLOR_COLORFUL;

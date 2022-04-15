@@ -1,6 +1,13 @@
 # ROS-application-for-pointcloud
 
 Abstruct:
+this program get point cloud data from depth camera through rostopic, process(detect object, apply filter or something) and show it in simulation(CoppeliaSim) or new window. run
+  rosrun pointpkg pointer
+
+
+
+
+
 
 ros_interface:    get pointcloud data from 3D cameras via ros 
 

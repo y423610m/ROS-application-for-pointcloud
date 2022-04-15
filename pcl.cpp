@@ -56,18 +56,18 @@ void PCL::update(int& number_of_points, std::vector<float>& points, std::vector<
 	cloud_xyzrgba_->clear();
 
 
-	//vevtor -> pcd •ÏŠ·
+	//vevtor -> pcd å¤‰æ›
 	PCL::_convert_array_to_pcd(number_of_points, points, color);
 
-	//•Û‘¶Ï‚İƒf[ƒ^“Ç‚İ‚İ
+	//ä¿å­˜æ¸ˆã¿ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
 	//PCL::_read_pcd_file("src/pointpkg/pcd/MS_xyzrgba5/1.pcd", number_of_points, color);
 	//PCL::_read_pcd_file("src/pointpkg/pcd/MS_xyzrgba5/", number_of_points, color);
 	//PCL::_read_pcd_file("src/pointpkg/pcd/MS_xyzrgba_common/tool_blue.pcd", number_of_points, color);
 
-	//ƒJƒƒ‰->coppeliasimƒ‚ƒfƒ‹À•W•ÏŠ·
+	//ã‚«ãƒ¡ãƒ©->coppeliasimãƒ¢ãƒ‡ãƒ«åº§æ¨™å¤‰æ›
 	PCL::_transform();
 		
-	//”ÍˆÍŠOœ‹
+	//ç¯„å›²å¤–é™¤å»
 	PCL::_filterPassThrough();
 
 
@@ -81,23 +81,23 @@ void PCL::update(int& number_of_points, std::vector<float>& points, std::vector<
 	
 	//PCL::_recognite(); // to be improved
 
-	//ÚG”»’è@—±qƒtƒBƒ‹ƒ^
+	//æ¥è§¦åˆ¤å®šã€€ç²’å­ãƒ•ã‚£ãƒ«ã‚¿
 	//PCL::_detect_contact_with_particlefilter();
 
 
-	//ÚG”»’è@CoppeliaSim
+	//æ¥è§¦åˆ¤å®šã€€CoppeliaSim
 	PCL::_detect_contact_with_coppeliasim();
 
 
 
 
-	//V‹Kwindowã‚É“_ŒQ•`‰æDPCL::PCL()‚Ìviewer‚Ì‰Šú‰»•K—v
+	//æ–°è¦windowä¸Šã«ç‚¹ç¾¤æç”»ï¼PCL::PCL()ã®viewerã®åˆæœŸåŒ–å¿…è¦
 	//PCL::drawResult();
 
-	//pcdƒf[ƒ^icloud_xyzrgba_j•Û‘¶D  •Û‘¶êŠw’è‚ÍÅŒã‚É"/"–Y‚ê‚¸‚É
+	//pcdãƒ‡ãƒ¼ã‚¿ï¼ˆcloud_xyzrgba_ï¼‰ä¿å­˜ï¼  ä¿å­˜å ´æ‰€æŒ‡å®šã¯æœ€å¾Œã«"/"å¿˜ã‚Œãšã«
 	//PCL::_write_pcd_file("src/pointpkg/pcd/MS_xyzrgba11/");
 
-	//pcd->vevtor •ÏŠ·
+	//pcd->vevtor å¤‰æ›
 	PCL::_convert_pcd_to_array(number_of_points, points, color);
 
 	counter++;
@@ -105,7 +105,7 @@ void PCL::update(int& number_of_points, std::vector<float>& points, std::vector<
 	
 }
 
-//vector‚©‚çpcd‚Ö•ÏŠ·
+//vectorã‹ã‚‰pcdã¸å¤‰æ›
 void PCL::_convert_array_to_pcd(int& number_of_points, std::vector<float>& points, std::vector<int>& color) {
 	if (points.size() == 0) return;
 
@@ -167,15 +167,10 @@ void PCL::_convert_array_to_pcd(int& number_of_points, std::vector<float>& point
 			a = 0;
 			cloud_xyzrgba_->push_back(pcl::PointXYZRGBA(px, py, pz, r, g, b, a));
 		}
-		//std::cout << "px"<<px << std::endl;
-		//cloud_xyzrgba_ = cloud_tmp;
-		//std::cout << cloud->size() << std::endl;
-		//std::cout << "array to pcd  " << cloud_xyzrgba_->size() << std::endl;
-
 	}
 }
 
-//pcd‚©‚çvector‚Ö•ÏŠ·
+//pcdã‹ã‚‰vectorã¸å¤‰æ›
 void PCL::_convert_pcd_to_array(int& number_of_points, std::vector<float>& points, std::vector<int>& color) {
 	if (cloud_xyzrgba_->size() == 0) return;
 
@@ -223,7 +218,7 @@ void PCL::_convert_pcd_to_array(int& number_of_points, std::vector<float>& point
 
 
 
-//octree‚É‚æ‚éƒf[ƒ^ˆ³k
+//octreeã«ã‚ˆã‚‹ãƒ‡ãƒ¼ã‚¿åœ§ç¸®
 void PCL::_compress() {
 	double a = clock();
 	std::stringstream compressedData_;
@@ -329,26 +324,8 @@ void PCL::_remove_plane() {
 }
 
 void PCL::_detect_contact_with_particlefilter() {
-	//read pcd file
-	//std::cout << counter << std::endl;
+
 	if (!track_inited_) {
-		//target_cloud.reset(new Cloud());
-		//if (pcl::io::loadPCDFile(target, *target_cloud) == -1) {
-		//	std::cout << "pcd file not found" << std::endl;
-		//	exit(-1);
-		//}
-
-		//cloud_target_remover_.reset(new Cloud());
-		//if (remover!="" && pcl::io::loadPCDFile(remover, *cloud_target_remover_) == -1) {
-		//	std::cout << "pcd file not found" << std::endl;
-		//	exit(-1);
-		//}
-
-		//Rcenter_.reset(new Cloud());
-		//if (Rcenter!="" && pcl::io::loadPCDFile(Rcenter, *Rcenter_) == -1) {
-		//	std::cout << "pcd file not found" << std::endl;
-		//	exit(-1);
-		//}
 
 		ParticleT bin_size;
 		bin_size.x = 0.1f;
@@ -389,54 +366,22 @@ void PCL::_detect_contact_with_particlefilter() {
 		coherence->setMaximumDistance(0.01);
 		tracker_->setCloudCoherence(coherence);
 
-
-		//prepare the model of tracker's target
-		//Eigen::Vector4f c;
-		//pcl::compute3DCentroid<RefPointType>(*target_cloud, c);
-		//Eigen::Affine3f trans = Eigen::Affine3f::Identity();
-		//trans.translation().matrix() = Eigen::Vector3f(c[0], c[1], c[2]);
-		//pcl::transformPointCloud<RefPointType>(*target_cloud, *transed_ref, trans.inverse());
-		//gridSampleApprox(transed_ref, *transed_ref_downsampled, downsampling_grid_size_);
-
-		//PL(2)
-
-
-		//set reference model and trans
-		//tracker_->setTrans(trans);
-		//tracker_->setReferenceCloud(transed_ref_downsampled);
 		trans = contact_detector_->init_for_particlefilter();
 		tracker_->setTrans(trans);
 		tracker_->setReferenceCloud(contact_detector_->get_cloud_target());
-
-		///set target_remover
-		//if (remover != "") {
-		//	pcl::transformPointCloud<RefPointType>(*cloud_target_remover_, *cloud_target_remover_ref_, trans.inverse());
-		//	gridSampleApprox(cloud_target_remover_ref_, *cloud_target_remover_ref_downsampled_, downsampling_grid_size_);
-		//}
-
-		//set Rcenter ref
-		//if(Rcenter!="")	pcl::transformPointCloud<RefPointType>(*Rcenter_, *Rcenter_ref_, trans.inverse());
 
 		track_inited_ = true;
 
 	}
 
-	PL(3)
-
-
 	std::lock_guard<std::mutex> lock(mtx_);
 	cloud_pass_.reset(new Cloud);
 	cloud_pass_downsampled_.reset(new Cloud);
-	//filterPassThrough(cloud_xyzrgba_, *cloud_pass_);
-	//double downsampling_grid_size_ = 0.002;
-	//gridSampleApprox(cloud_pass_, *cloud_pass_downsampled_, downsampling_grid_size_);
 	gridSampleApprox(cloud_xyzrgba_, *cloud_pass_downsampled_, downsampling_grid_size_);
 
 
 	if (counter < 2) return;
 
-	//std::cout << " pcd size "; std::cout << target_cloud->size() << std::endl;
-	//std::cout << " target " << cloud_pass_downsampled_->size() << std::endl;
 	PL(cloud_pass_downsampled_->size())
 	PL(cloud_xyzrgba_->size())
 
@@ -461,45 +406,9 @@ void PCL::_detect_contact_with_particlefilter() {
 			//cloud_xyzrgba_->push_back(point);
 		}
 
-		//•W€•Î·‚©‚çÁ¸—\‘ª
-		/*
-		int cnt = 0;
-		auto it = &(particle_cloud->points[0].x);
-		double sumx = 0, sumy = 0, sumz = 0;
-		double vx = 0, vy = 0, vz = 0;
-		int size = particle_cloud->size();
-		while (cnt < size) {
-			//std::cout << *it << std::endl;
-			float x = *it-1.5; sumx += x; vx += x * x; it++;
-			float y = *it; sumy += y; vy += y * y; it++;
-			float z = *it-0.05; sumz += z; vz += z * z; it++;
-			it += 5;
-			cnt++;
-			//cout << "qwertn " << (&(particle_cloud->points[1].) - &(particle_cloud->points[0].x)) << std::endl;
-		}
-		vx = vx / size; sumx = sumx / size; sumx = sumx * sumx;
-		vy = vy / size; sumy = sumy / size; sumy = sumy * sumy;
-		vz = vz / size; sumz = sumz / size; sumz = sumz * sumz;
-		std::cout << "x  “ñæ˜a  " << vx << "  •½‹Ï2æ  " << sumx <<"  •ªU  "<< vx- sumx << std::endl;//0.001
-		std::cout << "y  “ñæ˜a  " << vy << "  •½‹Ï2æ  " << sumy << "  •ªU  " << vy - sumy << std::endl;
-		std::cout << "z  “ñæ˜a  " << vz << "  •½‹Ï2æ  " << sumz << "  •ªU  " << vz - sumz << std::endl;
-		std::cout << ""<<std::endl;
-		if (vx - sumx < 0.00055 || vy-sumy<0.0005) {
-			//cloud_xyzrgba_ = particle_cloud;
-		}
-		*/
-
-
+		
 		ParticleXYZRPY result = tracker_->getResult();
 		transformation = tracker_->toEigenMatrix(result);
-		//move close to camera a little for better visualization
-		//transformation.translation() += Eigen::Vector3f(0.0f, 0.0f, 0.0f);
-		//CloudPtr result_cloud(new Cloud());
-		//CloudPtr tmp;
-		//if (remover == "") tmp = transed_ref_downsampled;
-		//else tmp = cloud_target_remover_ref_downsampled_;
-		//pcl::transformPointCloud<RefPointType>(*tmp, *result_cloud, transformation);
-		//pcl::transformPointCloud<RefPointType>(*(tracker_->getReferenceCloud()), *result_cloud, transformation);
 
 		contact_detector_->transform_init(transformation);
 
@@ -516,93 +425,6 @@ void PCL::_detect_contact_with_particlefilter() {
 			point.g = 255;
 			cloud_xyzrgba_->push_back(point);
 		}
-
-
-		//return;
-
-		//ˆÈ‰º‚ÍContactDetector::remove_and_detect()‚ÉˆÚs
-
-		////cloud_ ‚Æ result‚Ìˆê’vŒŸo
-		//pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZRGBA> octree(0.005);
-		//octree.setInputCloud(result_cloud);
-		//octree.addPointsFromInputCloud();
-		//octree.switchBuffers();
-		//octree.setInputCloud(cloud_xyzrgba_);
-		//octree.addPointsFromInputCloud();
-
-		//std::vector<int> newPointIdxVector;
-		//octree.getPointIndicesFromNewVoxels(newPointIdxVector);
-		//pcl::PointIndices::Ptr inliers(new pcl::PointIndices());
-		//for (int i = 0; i < newPointIdxVector.size(); i++) {
-		//	inliers->indices.push_back(newPointIdxVector[i]);
-		//}
-		//pcl::PointCloud<pcl::PointXYZRGBA>::Ptr consensus(new pcl::PointCloud<pcl::PointXYZRGBA>);
-		//pcl::PointCloud<pcl::PointXYZRGBA>::Ptr different(new pcl::PointCloud<pcl::PointXYZRGBA>);
-
-		//pcl::ExtractIndices<pcl::PointXYZRGBA> extract;
-		//extract.setInputCloud(cloud_xyzrgba_);
-		//extract.setIndices(inliers);
-		//extract.setNegative(false);
-		//extract.filter(*different);
-		//extract.setNegative(true);//red
-		//extract.filter(*consensus);
-		////std::cout << "aa " << consensus->size() << std::endl;
-
-		////different‚Éconsensus‚ğ‰Á‚¦‚é
-
-
-		////for (const auto& p : *result_cloud) different->push_back(p);
-
-		//cloud_xyzrgba_ = different;
-
-
-		////‹ß–T“_’Tõ
-		//if (Rcenter!="") {
-		//			
-		//	result_cloud->clear();
-		//	pcl::transformPointCloud<RefPointType>(*Rcenter_ref_, *result_cloud, transformation);
-
-
-		//	pcl::KdTreeFLANN<pcl::PointXYZRGBA> kdtree;
-		//	kdtree.setInputCloud(cloud_xyzrgba_);
-
-		//	pcl::PointXYZRGBA searchPoint = (*result_cloud)[0];
-
-		//	searchPoint.r = 255;
-		//	searchPoint.g = 0;
-		//	searchPoint.b = 0;
-
-		//	//std::cout << searchPoint.x << " " << searchPoint.y << " " << searchPoint.z << std::endl;
-
-		//	//cloud_xyzrgba_->clear();
-
-		//	std::vector<int> pointIdxRadiusSearch;
-		//	std::vector<float> pointRadiusSquareDistance;
-
-		//	float R = 0.01;
-
-		//	int n = kdtree.radiusSearch(searchPoint, R, pointIdxRadiusSearch, pointRadiusSquareDistance);
-		//	std::cout << n << std::endl;
-		//	if(n>150) for (int i = 0; i < int(std::log2(n)-6/ 1); i++) std::cout << "####";
-		//	std::cout << std:: endl; 
-
-
-		//	cloud_xyzrgba_->push_back(searchPoint);
-
-		//}
-
-		//for (auto& cloud : *consensus) {
-		//	//cloud.r = 255;// -cloud.r;
-		//	//cloud.g = 255;// -cloud.g;
-		//	cloud.b = 255;// -cloud.b;
-		//	cloud_xyzrgba_->push_back(cloud);
-		//}
-		//result_cloud->;
-	}
-
-	//cloud_xyzrgba_ = result_cloud;
-	//std::cout << particle_cloud->size() << std::endl;
-	
 
 	new_cloud_ = false;
 	
@@ -665,26 +487,13 @@ void PCL::_recognite() {
 		std::cout << "Error loading model cloud." << std::endl;
 	}
 
-	//if (pcl::io::loadPCDFile("milk_color.pcd", *model) < 0){
-	//	std::cout << "Error loading model cloud." << std::endl;
-	//	return;
-	//}
 
 	if (pcl::io::loadPCDFile("src/pointpkg/pcd/MS_xyzrgba3/101.pcd", *scene) < 0)
 	{
 		std::cout << "Error loading model cloud." << std::endl;
 		return;
 	}
-	//if (pcl::io::loadPCDFile("milk_cartoon_all_small_clorox.pcd", *scene) < 0)
-	//{
-	//	std::cout << "Error loading model cloud." << std::endl;
-	//	return;
-	//}
 
-	//*scene = *cloud_xyzrgba_;
-	//std::cout << scene->size() << "   aaa" << std::endl;
-
-	//
 //  Set up resolution invariance
 //
 	if (use_cloud_resolution_)
@@ -1076,7 +885,7 @@ void PCL::_transform() {
 
 void PCL::_detect_contact_with_coppeliasim(){
 	if (cloud_xyzrgba_->size() == 0) return;
-	////â‘ÎÀ•WŒ´“_‚É–ß‚·
+	////çµ¶å¯¾åº§æ¨™åŸç‚¹ã«æˆ»ã™
 	std::vector<float> RMT = coppeliasim_interface_->get_remover_transform();
 	contact_detector_->transform_init(&RMT[0], &RMT[3], true);
 
@@ -1318,7 +1127,7 @@ void ContactDetector::transform_rotated(float* pos, float* ori, bool inverse) {
 void ContactDetector::remove_and_detect(pcl::PointCloud<pcl::PointXYZRGBA>::Ptr& cloud_xyzrgba) {
 	//return;
 
-	//cloud_ ‚Æ result‚Ìˆê’vŒŸo
+	//cloud_ ã¨ resultã®ä¸€è‡´æ¤œå‡º
 	pcl::octree::OctreePointCloudChangeDetector<pcl::PointXYZRGBA> octree(0.005);
 	octree.setInputCloud(cloud_mask_transformed_);
 	octree.addPointsFromInputCloud();

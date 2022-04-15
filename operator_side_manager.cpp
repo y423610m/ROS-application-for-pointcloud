@@ -31,13 +31,10 @@ void OperatorSideManager::update() {
 
 	/////////////////////////////PCL//////////////////////////////////////////////
 	pcl_->update(points_size_, points_, color_);
-	//std::cout << "ope pcl" << std::endl;
 
 
 	//////////////////////////PointCloudShower////////////////////////////////////
 	coppeliasim_interface_->update(points_size_, points_, color_, COP_FUNC_MAIN);
-	//std::cout << "ope cop" << std::endl;
-
 	//coppeliasim_interface_->update(points_size_, points_, color_, COP_FUNC_APPEARED);
 	//coppeliasim_interface_->update(pcl_->get_appeared_points_size(), pcl_->get_appeared_points(), nullptr,COP_FUNC_APPEARED);
 
